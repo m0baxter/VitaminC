@@ -1,0 +1,23 @@
+version: "3"
+services:
+   vitaminc:
+      build:
+         context: .
+         dockerfile: vitaminc.Dockerfile
+      image: vitaminc_trainin_image
+      ports:
+        - 9000:9000
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
+      logging:
+         options:
+            max-size: "10m"
+            max-file: "5"
+      volumes:
+        - ./data:/app/data
+        - ./results:/app/results
