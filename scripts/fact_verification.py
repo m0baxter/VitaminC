@@ -117,6 +117,7 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(
         model_args.tokenizer_name if model_args.tokenizer_name else model_args.model_name_or_path,
         cache_dir=model_args.cache_dir,
+        #use_fast = False,
     )
     model = AutoModelForSequenceClassification.from_pretrained(
         model_args.model_name_or_path,
@@ -186,7 +187,8 @@ def main():
         eval_results.update(eval_result)
 
         if training_args.eval_all_checkpoints:
-            checkpoints = trainer._sorted_checkpoints()
+            #checkpoints = trainer._sorted_checkpoints(checkpoint_prefix = "checkpoint")
+            checkpoints = trainer._sorted_checkpoints(output_dir = training_args.output_dir)
             best_ckpt = ''
             highest_acc = 0
             for ckpt in checkpoints:

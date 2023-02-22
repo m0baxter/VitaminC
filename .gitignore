@@ -130,4 +130,6 @@ dmypy.json
 
 *.swo
 *.swp
+data/
+results/
 
